@@ -1,127 +1,173 @@
-@import "mocha.css"; 
+@define-color highlight rgba(117, 241, 250, 1);
+@define-color dark-9 rgba(8, 8, 10, 0.90);    /* Deep ink-black at 90% opacity */
+@define-color dark-8 rgba(20, 20, 22, 1);     /* Darker charcoal for module backgrounds */
+@define-color dark-7 rgba(32, 32, 35, 1);     /* Deep slate for hover states & slider troughs */
+@define-color dark-6 rgba(48, 48, 51, 1);     /* Subtle dark accents */
+@define-color dark-5 rgba(120, 120, 125, 1);  /* Muted grey for inactive workspaces */
 
 * {
-    font-family: "MesloLGS Nerd Font Mono Bold";
-    font-size: 16px;
-    min-height: 0;
-    font-weight: bold;
+  /* Proper fallback chain ensuring system icons render reliably */
+  font-family: "JetBrainsMono Nerd Font", "JetBrainsMonoNL Nerd Font", "Symbols Nerd Font", sans-serif;
+  font-size: 15px;
 }
 
 window#waybar {
-    background: transparent;
-    background-color: @crust;
-    color: @overlay0;
-    transition-property: background-color;
-    transition-duration: 0.1s;
-    border-bottom: 1px solid @overlay1;
-}
-
-#window {
-    margin: 8px;
-    padding-left: 8;
-    padding-right: 8;
-}
-
-button {
-    box-shadow: inset 0 -3px transparent;
-    border: none;
-    border-radius: 0;
-}
-
-button:hover {
-    background: inherit;
-    color: @mauve;
-    border-top: 2px solid @mauve;
+  background-color: @dark-9;
+  color: white;
+  /* Removed bottom border entirely for a sleek, borderless floating bar look */
 }
 
 #workspaces button {
-    padding: 0 4px;
+  padding: 4px 10px;
+  margin: 7px 2px 7px 7px;
+  background: transparent;
+  border-radius: 6px;
+  color: @dark-5;
+  font-weight: 600;
+  transition: all 0.2s ease-in-out;
 }
 
-#workspaces button.focused {
-    background-color: rgba(0, 0, 0, 0.3);
-    color: @rosewater;
-    border-top: 2px solid @rosewater;
+#workspaces button:hover {
+  background: @dark-8;
+  color: white;
 }
 
 #workspaces button.active {
-    background-color: rgba(0, 0, 0, 0.3);
-    color: @mauve;
-    border-top: 2px solid @mauve;
+  background: @highlight;
+  color: black;
+  font-weight: 800;
 }
 
-#workspaces button.urgent {
-    background-color: #eb4d4b;
+/* Center Module - The Active Application Window Name */
+#window {
+  color: @highlight;
+  font-weight: 600;
+  padding: 5px 16px;
+  background: rgba(117, 241, 250, 0.06); 
+  border: 1px solid rgba(117, 241, 250, 0.12);
+  border-radius: 8px;
+  margin: 5px 0px;
 }
 
-#pulseaudio,
-#clock,
+/* Right-Aligned Clock/Date Module with Protective Screen Gutter Edge */
+#clock {
+  font-weight: 600;
+  margin: 5px 12px 5px 0px; /* 12px right margin prevents it from hugging the screen edge */
+  padding: 5px 12px;
+  background: @dark-8;
+  border-radius: 8px;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#clock:hover {
+  background: @dark-7;
+  color: @highlight;
+}
+
+/* Individual System Module Styling with Smooth Hover Feedback */
+#submap,
 #battery,
+#bluetooth,
+#network,
 #cpu,
 #memory,
-#disk,
-#temperature,
-#backlight,
-#wireplumber,
-#tray,
-#network,
-#mode,
-#scratchpad {
-  margin-top: 2px;
-  margin-bottom: 2px;
-  margin-left: 4px;
-  margin-right: 4px;
-  padding-left: 4px;
-  padding-right: 4px;
-}
-
-#clock {
-    color: @maroon;
-    border-bottom: 2px solid @maroon;
-}
-
-#clock.date {
-    color: @mauve;
-    border-bottom: 2px solid @mauve;
-}
-
+#volume,
 #pulseaudio {
-    color: @blue;
-    border-bottom: 2px solid @blue;
+  border-radius: 8px;
+  padding: 5px 12px;
+  background: @dark-8;
+  margin: 5px 8px 5px 0px;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-#network {
-    color: @yellow;
-    border-bottom: 2px solid @yellow;
+#battery:hover,
+#bluetooth:hover,
+#network:hover,
+#cpu:hover,
+#memory:hover,
+#volume:hover,
+#pulseaudio:hover {
+  background: @dark-7;
+  color: @highlight;
 }
 
-#idle_inhibitor {
-    margin-right: 12px;
-    color: #7cb342;
+#submap,
+#workspaces button.urgent {
+  background: rgba(227, 81, 73, 1);
+  color: black;
 }
 
-#idle_inhibitor.activated {
-    color: @red;
+/* Slick Volume Slider */
+#pulseaudio-slider {
+  padding: 0px;
+  margin: 0px 0px 0px 8px;
 }
 
-#battery {
-    color: @green;
-    border-bottom: 2px solid @green;
+#pulseaudio-slider slider {
+  all: unset;
+  min-height: 0;
+  min-width: 0;
+  opacity: 0;
+  background-image: none;
+  border: none;
+  box-shadow: none;
 }
 
-/* If workspaces is the leftmost module, omit left margin */
-.modules-left>widget:first-child>#workspaces {
-    margin-left: 0;
+#pulseaudio-slider trough {
+  min-height: 6px;
+  min-width: 75px;
+  border-radius: 5px;
+  background: @dark-7;
 }
 
-/* If workspaces is the rightmost module, omit right margin */
-.modules-right>widget:last-child>#workspaces {
-    margin-right: 0;
+#pulseaudio-slider highlight {
+  min-width: 10px;
+  border-radius: 5px;
+  background: @highlight;
 }
 
-#custom-vpn {
-    color: @lavender;
-    border-radius: 15px;
-    padding-left: 6px;
-    padding-right: 6px;
+/* Media Group Layout 
+   Parent `#media` is kept completely unstyled. 
+   This prevents "ghost" gaps on your left bar when no media is active.
+*/
+#media {
+  background: transparent;
+  padding: 0;
+  margin: 0;
+}
+
+#custom-media-animation {
+  color: #42ff9f;
+  font-size: 13px;
+  margin-left: 20px; /* Creates spacing from workspaces only when active */
+  margin-right: 8px;
+}
+
+#custom-media-now-playing {
+  color: #42ff9f;
+  font-weight: 600;
+  padding: 2px 12px;
+  background: rgba(66, 255, 159, 0.06); 
+  border: 1px solid rgba(66, 255, 159, 0.12);
+  border-radius: 8px;
+  margin-right: 8px;
+}
+
+#custom-media-time {
+  color: @dark-5;
+  font-size: 13px;
+  margin-right: 10px;
+}
+
+/* Modernized Hover Tooltips */
+tooltip {
+  background: @dark-9;
+  border: 1px solid @dark-7;
+  border-radius: 8px;
+  padding: 8px 12px;
+}
+
+tooltip label {
+  color: white;
+  font-family: "JetBrainsMono Nerd Font", monospace; 
 }

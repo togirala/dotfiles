@@ -1,0 +1,89 @@
+@define-color highlight rgba(117, 241, 250, 1);
+@define-color dark-9 rgba(8, 8, 10, 0.90);    /* Deep ink-black at 90% opacity */
+@define-color dark-8 rgba(20, 20, 22, 1);     /* Darker charcoal for module backgrounds */
+@define-color dark-7 rgba(32, 32, 35, 1);     /* Deep slate for hover states */
+@define-color dark-5 rgba(120, 120, 125, 1);  /* Muted grey for inactive workspaces */
+
+* {
+  /* Proper fallback chain ensuring system icons render reliably */
+  font-family: "JetBrainsMono Nerd Font", "JetBrainsMonoNL Nerd Font", "Symbols Nerd Font", sans-serif;
+  font-size: 14px;
+}
+
+window#waybar {
+  background-color: @dark-9;
+  color: white;
+  /* Seamless look without bottom border */
+}
+
+#workspaces button {
+  padding: 4px 10px;
+  margin: 5px 2px 5px 7px;
+  background: transparent;
+  border-radius: 6px;
+  color: @dark-5;
+  font-weight: 600;
+  transition: all 0.2s ease-in-out;
+}
+
+#workspaces button:hover {
+  background: @dark-8;
+  color: white;
+}
+
+#workspaces button.active {
+  background: @highlight;
+  color: black;
+  font-weight: 800;
+}
+
+/* Center Module - The Active Application Window Name */
+#window {
+  color: @highlight;
+  font-weight: 600;
+  padding: 4px 16px;
+  background: rgba(117, 241, 250, 0.06); 
+  border: 1px solid rgba(117, 241, 250, 0.12);
+  border-radius: 8px;
+  margin: 5px 0px;
+}
+
+/* Right-Aligned Minimal Modules */
+#battery,
+#clock,
+#submap {
+  border-radius: 8px;
+  padding: 4px 12px;
+  background: @dark-8;
+  margin: 5px 8px 5px 0px;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Keep a safe gap on the right-most module to prevent screen-edge hugging */
+#clock {
+  margin-right: 12px;
+}
+
+#battery:hover,
+#clock:hover {
+  background: @dark-7;
+  color: @highlight;
+}
+
+#submap {
+  background: rgba(227, 81, 73, 1);
+  color: black;
+}
+
+/* Modernized Hover Tooltips */
+tooltip {
+  background: @dark-9;
+  border: 1px solid @dark-7;
+  border-radius: 8px;
+  padding: 8px 12px;
+}
+
+tooltip label {
+  color: white;
+  font-family: "JetBrainsMono Nerd Font", monospace; 
+}

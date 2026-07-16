@@ -1,16 +1,47 @@
+# --- Theme & Colors ---
+# Catppuccin Mocha provides vibrant terminal colors, but we override 
+# the background to absolute pitch-black (#000000) for high-contrast styling.
 theme = Catppuccin Mocha
-# theme = GruvboxDark
-# font-family = Meslo LGS Nerd Font Mono
-# font-family = CaskaydiaMono Nerd Font
-# font-family = CaskaydiaCove Nerd Font
-font-size = 14
-# background-opacity = 0.95
-gtk-titlebar = false
-# custom-shader = /home/chris/bloom.glsl
-#custom-shader = /home/chris/crt.glsl
+background = #000000
 
-# Slowdown mouse scrolling
+# --- Window Transparency & Enhancements ---
+# Set background opacity to 0.8 as requested.
+background-opacity = 0.8
+
+# Enables underlying blur so that text remains beautifully sharp and readable 
+# without clashing with bright wallpapers underneath.
+background-blur = true
+
+# Crucial enhancement for btop, htop, and other TUI tools: ensures that apps 
+# drawing full-screen interfaces don't override your 0.8 window transparency.
+background-opacity-cells = true
+
+# --- Window Styling & Layout ---
+# Adds padding around the terminal edges so your text isn't crammed right up 
+# against your Hyprland borders. A true modern luxury.
+window-padding-x = 12
+window-padding-y = 10
+
+# Disables client-side window decorations entirely, allowing Hyprland to seamlessly 
+# handle borders, shadows, and stacking animations.
+window-decoration = false
+gtk-titlebar = false
+
+# --- Typography ---
+# JetBrains Mono is widely considered the most legible and clean terminal font.
+font-family = "JetBrainsMono Nerd Font"
+# font-family = "FiraCode Nerd Font"
+# font-family = "CaskaydiaMono Nerd Font"
+# font-family = "Meslo LGS Nerd Font Mono"
+font-size = 14
+
+# --- Mouse & Scrolling ---
+# Slow down mouse scrolling for better control
 mouse-scroll-multiplier = 0.95
 
-# Fix general slowness on hyprland (https://github.com/ghostty-org/ghostty/discussions/3224)
+# --- Performance & Window Manager Behavior ---
+# Fixes general rendering slowness on Hyprland
 async-backend = epoll
+
+# Closes window instantly without GTK dialog popups
+confirm-close-surface = false

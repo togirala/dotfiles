@@ -1,0 +1,30 @@
+{
+    "height": 32,
+    "layer": "top",
+    "modules-left": ["hyprland/workspaces", "hyprland/submap"],
+    "modules-center": ["hyprland/window"],
+    "modules-right": ["battery", "clock"],
+
+    "hyprland/window": {
+        "max-length": 50
+    },
+
+    "battery": {
+        "interval": 60,
+        "format": "{capacity}% {icon}",
+        "format-icons": {
+            "default": ["󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
+            "charging": ["󰢟", "󰢜", "󰂆", "󰂇", "󰂈", "󰢝", "󰂉", "󰢞", "󰂊", "󰂋", "󰂅"]
+        }
+    },
+
+    "clock": {
+        "format": "󰥔 {:%a, %d. %b %I:%M %p}",
+        "tooltip-format": "<tt><small>{calendar}</small></tt>",
+        "calendar": {
+            "format": {
+                "today": "<span color='#75f1fa'><b>{}</b></span>"
+            }
+        }
+    }
+}
