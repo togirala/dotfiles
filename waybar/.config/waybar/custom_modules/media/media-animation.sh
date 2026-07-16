@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# Quietly exit the moment Waybar closes the pipe (stops broken pipe spam)
+trap 'exit 0' PIPE
+
 # Soundwave animation frames
 animation_frames=("▂▄▆" "▄▂▆" "▄▆▂" "▆▄▂" "▆▂▄")
 

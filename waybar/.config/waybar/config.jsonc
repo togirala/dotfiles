@@ -2,7 +2,7 @@
     "layer": "top",
     "modules-left": ["hyprland/workspaces", "group/media"],
     "modules-center": ["hyprland/window"],
-    "modules-right": ["hyprland/submap", "group/volume", "battery", "bluetooth", "network", "cpu", "memory", "clock"],
+    "modules-right": ["hyprland/submap", "group/volume", "battery", "bluetooth", "network", "custom/vpn", "cpu", "memory", "clock"],
 
     "hyprland/window": {
         "max-length": 50
@@ -42,7 +42,8 @@
     },
 
     "network": {
-        "format": "",
+        "interface": "wlp4s0",
+        "format": "󰖩 {essid}", 
         "format-wifi": "",
         "format-ethernet": "",
         "format-disconnected": "󰤭", 
@@ -52,6 +53,19 @@
         "tooltip-format-disconnected": "󰖪",
         "max-length": 50,
         "on-click": "nmrs-gui"
+    },
+
+    "custom/vpn": {
+        "interval": 3,
+        "format": "{}",
+        "return-type": "json",
+        "exec": "if nmcli connection show --active | grep -q -i 'vpn'; then echo '{\"text\": \"🔒 VPN\", \"class\": \"connected\"}'; else echo '{\"text\": \"🔓 No VPN\", \"class\": \"disconnected\"}'; fi",
+        // Left-click: Connects to the fastest global server
+        "on-click": "protonvpn connect --fastest",
+        // Right-click: Connects to the fastest US server
+        "on-click-right": "protonvpn connect --country US",
+        // Middle-click (scroll-wheel press): Disconnects the VPN cleanly
+        "on-click-middle": "protonvpn disconnect"
     },
 
     "clock": {

@@ -1,8 +1,13 @@
 #!/usr/bin/env bash
 
-# Runs zscroll when a player is active, and cleanly terminates it when the player closes.
-# This ensures that when no music is playing, the output is TRULY empty,
-# forcing Waybar to hide the styled backgrounds/borders of #custom-media-now-playing.
+# Clean up the background zscroll process and exit gracefully on exit or broken pipe
+cleanup() {
+  if [ -n "$zscroll_pid" ]; then
+    kill "$zscroll_pid" 2>/dev/null
+  fi
+  exit 0
+}
+trap cleanup EXIT PIPE INT TERM
 
 while :; do
   status=$(playerctl status 2>/dev/null)
@@ -24,6 +29,7 @@ while :; do
     # Clean up zscroll process cleanly once playback fully stops
     kill "$zscroll_pid" 2>/dev/null
     wait "$zscroll_pid" 2>/dev/null
+    zscroll_pid=""
     echo ""
   else
     # No active media player; output absolutely nothing and idle-sleep

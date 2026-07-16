@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# Prevent broken pipes if Waybar cuts the connection mid-execution
+trap 'exit 0' PIPE
+
 # Fetch current position and total length
 time_info=$(playerctl metadata --format '{{duration(position)}}/{{duration(mpris:length)}}' 2>/dev/null)
 

@@ -91,6 +91,33 @@ window#waybar {
   color: @highlight;
 }
 
+/* Dedicated VPN Button Style with Active Connection state */
+#custom-vpn {
+  color: #ff9e64; /* Amber accent color when disconnected */
+  background: @dark-8;
+  border-radius: 8px;
+  padding: 5px 12px;
+  margin: 5px 8px 5px 0px;
+  font-weight: 600;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#custom-vpn:hover {
+  background: @dark-7;
+  color: #ffb86c;
+}
+
+/* Lights up green with a subtle border glow when the VPN connection is active */
+#custom-vpn.connected {
+  color: #42ff9f; 
+  background: rgba(66, 255, 159, 0.06); 
+  border: 1px solid rgba(66, 255, 159, 0.12);
+}
+
+#custom-vpn.connected:hover {
+  background: rgba(66, 255, 159, 0.12);
+}
+
 #submap,
 #workspaces button.urgent {
   background: rgba(227, 81, 73, 1);
@@ -162,12 +189,5 @@ window#waybar {
 /* Modernized Hover Tooltips */
 tooltip {
   background: @dark-9;
-  border: 1px solid @dark-7;
-  border-radius: 8px;
-  padding: 8px 12px;
-}
-
-tooltip label {
-  color: white;
-  font-family: "JetBrainsMono Nerd Font", monospace; 
+  border: 1px solid @dark-6;
 }
